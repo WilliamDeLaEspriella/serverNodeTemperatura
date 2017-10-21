@@ -1,0 +1,25 @@
+{
+  "name": "proyecto_tempe",
+  "version": "1.0.0",
+  "description": "trabajo corte calidad",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Willian de la espriella",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "crypto": "^1.0.1",
+    "express": "^4.16.2",
+    "fcm-push": "^1.1.3",
+    "firebase-admin": "^5.4.2",
+    "mongoose": "^4.12.3",
+    "nodemon": "^1.12.1",
+    "promise": "^8.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
+  }
+}
