@@ -1,84 +1,115 @@
 'use strict'
+
 const Device=require('../schemas/device')
+const Dato=require('../schemas/dato')
 const User=require('../schemas/user')
+const service = require('../services')
+const UserDevice=require('../schemas/user_device')
 
-function linkedDevice(req,res){
-
-
-} 
-/*registramos dispocitivo en la base de datos*/
-
-function postDevice(req,res){
-//console.log('POST /api/product')
-console.log(req.body)
-	let user=new User();
-	user.email="DSS"
-	user.displayName="asdedad"
-	user.password="Zsdsdv"
-
-	let device=new Device()
-	device.name= req.body.name
-	device.password=req.body.password
-	device.temperatura=req.body.temperatura
-	device.user=user;
-	user.save((err,deviceStored)=>{
-	device.save((err,deviceStored)=>{
-		if(err){
-
-			res.status(500).send(`error al salvar el dispocitivo en al base de datos: ${err}`)
-		}console.log(device)
-		res.status(200).send(device._id)
-	})	
-	})
-	
-	
-} 
-
-
-
-/*recibir datos dispocitivo
-	id=String type["vacio",id]
-	name=string
-	password=string
-	temperatura=double
-*/
-function datosDevice(req,res){
-
-	let  id = req.body.id
-	if(id=="vacio"){
-		postDevice(req,res);
-	}else{
-		putDevice(req,res);
-	}	
-} 
-function putDevice(req,res){
-let deviceId=req.body.id
-	let update=req.body
-
-	Device.findByIdAndUpdate(deviceId,update,(err,deviceUpdate)=>{
-		if(err) res.status(500).send({message:`error al actualizar el device: ${err}`})
-
-			res.status(200).send("Update")
-
-	})
-	
-} 
 
 function getDevice(req,res){
-	Device.find({},(err,devices)=>{
 
-		if(err) return res.status(500).send({menssage:`Error al realizar la peticion: ${err}` })
-	    if(!devices) return res.status(484).send({menssage:`el device no existe`})
-	res.status(200).send({devices})
-/*User.populate(devices, {path: "user"},function(err, devices){
+	Device.find({},(err,users) =>{
+	if(err) res.status(500).send("se exploto esta wea")
+		res.status(200).send({users})
+
+	})
+
+} 
+function getUSerDevice(req,res){
+
+	UserDevice.find({},(err,users) =>{
+	if(err) res.status(500).send("se exploto esta wea")
+		//res.status(200).send({users})
+	Device.populate(users, {path: "device"},function(err, devices){
         	res.status(200).send(devices);
-        });*/
+        });
+
 	})
 
 } 
 
+function postDevice(req,res){
+	UserDevice.findById(req.body.id,(err,userDevice)=>{
+		if(err){res.status(500).send(`error al buscar los datos del dispocitivo: ${err}`)}
+		console.log(userDevice)
+		if(userDevice==null){
+			res.status(403).send(`Usuario no existente`)
+		}else{
+		const dato=new Dato()
+		const device=new Device()
+		 device.name=req.body.name
+	 	device.password=req.body.password
+	 	device.dato=dato
+	 	dato.save((err,Edato)=>{
+	 		if(err){res.status(500).send(`los datos del dipocitivo no pudieron ser guardados: ${err}`)}
+	 	})
+	 	device.save((err, Edevice)=>{
+	 		if(err){
+	 			dato.remove(dato._id,(err,Rdevice)=>{})
+	 			res.status(500).send(`los datos del dipocitivo no pudieron ser guardados: ${err}`)}
+	 		
+			linkedUser(device._id,req,res)
+	 		//res.status(500).send(`error al guardar el dispocitivo ${err}`)
+	 })	 
+		}
+	})
+
+	
+}
+
+function putDevice(req,res){
+	let update=req.body
+	Device.find({name:req.device},(err,devices)=>{
+		if(err) res.status(500).send({message:`error al actualizar el device: ${err}`})	
+		Dato.findByIdAndUpdate(devices[0].dato,update,(err,deviceUpdate)=>{
+				if(err) res.status(500).send({message:`error al actualizar el device: ${err}`})	
+
+			res.status(200).send({message:"actualizado con exito"})
+
+		})
+
+	})
+	
+
+}
+function removeDevice(res ,req){
+	let id=req.body.id
+	Device.find({name:id},(err,devices)=>{
+		if(err) res.status(500).send({message:`error al remove el device: ${err}`})	
+	
+	res.status(200).send({message:"removido con exito"})
+	})
+}
+
+function linkedUser(id_d,req,res){
+
+		UserDevice.findByIdAndUpdate(req.body.id,{$set:{device:id_d}},(err,deviceUpdate)=>{
+			if(err) res.status(500).send({message:`error al actualizar el device: ${err}`})	
+			
+			res.status(200).send({message:"actualizado con exito"})
+		})
+}
+
+function linkedDevice(req,res){
+	let nameDevice=req.body.name
+	Device.find({name:nameDevice},(err,devices)=>{
+		if(err) res.status(500).send("error al vincular")
+			//res.status(200).send(devices)
+			if(devices.length == 0){
+				res.status(403).send("device no vinculado")
+			}else{
+ 				req.device = devices
+       		 	res.status(200).send(service.createTokenDevice(devices[0]))
+			}
+	})
+}
+   
 module.exports={
 	getDevice,
+	postDevice,
+	putDevice,
+	removeDevice,
 	linkedDevice,
-	datosDevice
+	getUSerDevice
 }

@@ -10,7 +10,10 @@
   "author": "Willian de la espriella",
   "license": "MIT",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "express": "^4.16.2",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.19.1",
     "mongoose": "^4.12.3",
     "nodemon": "^1.12.1"
   },
