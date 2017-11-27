@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "proyecto-teperaturas",
+  "private_key_id": "63aa084b3bf50bd31a3df197654788f69ad5f6d2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC0ikRjX3SkQiVZ\n7CmH4tk6fi1FtQawFhoWylSmsUawPU0yZ1+r/HcJ8hGuVNmNVjpjLss6pnHefsy7\nXiU+iBTRyRP9xYoU7wbwc7V+k52elevcpLCNyDus/SWBjJUThj2rPG8nn6hyGjDj\nCQCxJ7qPNf+oIZ4c2UkkvY+8UcCrjYLQH3X/xAGbmlbcZiOFc4EP+OApEUrCnbgf\nUCDOwk+WlbMwBFwF+BmQpaIW6Wh1WuR8cXthUL4Z+Y5AXieihehuhpA08FpeDSPz\nNjlcwvhsJeD8rJ5cAz1YRQSxJxFuwzggj+WIvZgM86qMvCm8gx7h+1gbSxaeRwfF\nJIkYl9BLAgMBAAECggEAUeQx1x1yTBuQ07QStoeIX0bihC7zxKWR2eqW8TGSTdjQ\njl9jfyC6YjGCIaBtOfX18A1Gs+jR18mOViMDI9UYFHxv6/lRg+NUM3dYyPxuT4PT\ng7bUOsurffEptRSufjey+1wjU0bRYkhNCn6H6NOLhPBKcdol3RIWYmr1qscubOG1\nWd5rR7A+GWtfI+HetFksZ5G/soN4SenuWCAAkfNwh+UxH+ehcDIZsSRgX/yUNTtH\nSr7XV1t2VyRkSp2pW+JFO97LQC6EQw63IqnyAlPhQzPaJnLS/JKC81mfYqqVlY6d\nQLH4B2Spv8exjlXnGrO92IW7r9UUsghTG5YWI/tbqQKBgQDfb/wmxpj6+arDqJ53\nAbuuXB0zpdQY4wADC2AoAS+ZN/k3iuLjss3PzbHEmDNPVZ0tt/6beHYcBSEwxh59\nRUo6Z0rCKJIp6CgbZmAbywQ77TvlD1JtZUJIdmOpFQW2QwGrrTYKemEX7/RV2T82\nccvypwe2HPZGilIsSCg/lX1DFQKBgQDO2d3EyhBkSac7Xo3gLs7Isq+CwsiIqK4c\nQ0XeG25vjXy0pSICdUEXxvKlgdZ3xKjX4RBzZoSEy+OgIcxfTMeD/Bb/V4Y0PHI6\nqr5/FfqKG6Vc73QrRKRr5+UbMR8foN+a6C8cDdjnYYaF5kakJScRiB/wLJqdXNiB\npthlXJ0d3wKBgCQOnlJjmixmPfh1LZ1m2jK5Cr1a9W9OsqHLJClQh63iKoWcFCFK\nqYvvVdCz/xO+bS8DkkLknarH6SNF1YXBuMjUAmxyv6Ojo1VIoBncGULSdefxIQwm\nWxv2fv66NcHD7nEV8rKeLSz/vB5egKT4mEEAU25AHj4j9D7RJi2coipBAoGAfIUy\nt3BchcLA5UB6b+Y9nRvUBAd16K6CgYkN2jLxPD4UQDrYSlqDoOim0XNjxB2i9rIJ\n0S55v+dtU8yE1ynFQXLT9UqfA3sP2LlIjACTHeiel1+esx1TTZH/nWrorYWOlhYH\npf+//yn6bUi+Zbnn1un3MAHp4akuvH3P7tTd0EkCgYEAkfd/HfMSHUtTNlCuQF1b\nudDYtKRJcyR/cbQ41JZp2JuoWWdJEP7y4WDxvCC/WbpYMjeL0nAXKbtCCWkk4spH\nQvuj+ANYU6cifr/DikZWMXDwfquqHp+guaQTyquxnJ5uRy8KNDsMuH1+LotJp6aP\nzuVFpWgyPvRgwvFQ7rHYF/E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "apptemp2017@proyecto-teperaturas.iam.gserviceaccount.com",
+  "client_id": "114139701576279054587",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/apptemp2017%40proyecto-teperaturas.iam.gserviceaccount.com"
+}

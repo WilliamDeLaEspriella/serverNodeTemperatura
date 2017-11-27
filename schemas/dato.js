@@ -4,7 +4,7 @@ const Schema=mongoose.Schema
 
 
 const DatoSchema= new Schema({
-	temperatura:{type:Number,default:0.0},
+	temperatura:{type:Number,default:38},
 	date:{type:Date,default:Date.now()}
 })
 
