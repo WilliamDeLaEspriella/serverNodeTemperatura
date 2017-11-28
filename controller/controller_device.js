@@ -120,7 +120,7 @@ function putDevice(req,res){
 												UserDevice.findByIdAndUpdate(devices[0]._id,{$set:{dato:req.body.temperatura}},(err,update)=>{
 													if(err) res.status(500).json(`error al actualizar el device: ${err}`)
 														console.log(update)	
-														notificacion(user[0].token,req.body.temperatura,devices[0]._id)
+														notificacion(user[0].token,req.body.temperatura,devices[0].name)
 														res.status(200).json("actualizado")
 												})
 
