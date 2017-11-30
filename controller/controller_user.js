@@ -2,25 +2,30 @@
 const User=require('../schemas/user')
 const Device = require('../schemas/device')
 const UserDevice=require('../schemas/user_device')
-
+const Historial=require('../schemas/Historial')
 
 function agregar_userDevice(req,res){
 	let userDevice =new UserDevice()
+	let historial =new Historial()
 	userDevice.nombre=req.body.nombre  
 	userDevice.apellido=req.body.apellido
 	userDevice.edad=req.body.edad
-	userDevice.save((err,EuserDevice)=>{
-		if(err) res.status(500).json(`error al crear el usuario de dispocitivo ${err}`)
-			User.findById(req.user,(err,user)=>{
-				if(err)if(err) res.status(500).json(`error al vincular usuario  ${err}`)
-						console.log(req.user)
-						user.user_devices.push(userDevice)
-	    				
-						user.save((err,users)=>{
-							if(err)  res.status(500).json(`Error al realizar la peticion: ${err}` )
-							res.status(200).json('USUARIO AGREGADO EXITOSO.')
-						})
+	userDevice.historial=historial
+	historial.save((err,histo)=>{
+			if(err) res.status(500).json(`error al crear el usuario de dispocitivo ${err}`)
+			userDevice.save((err,EuserDevice)=>{
+				if(err) res.status(500).json(`error al crear el usuario de dispocitivo ${err}`)
+					User.findById(req.user,(err,user)=>{
+						if(err)if(err) res.status(500).json(`error al vincular usuario  ${err}`)
+								console.log(req.user)
+								user.user_devices.push(userDevice)
+			    				
+								user.save((err,users)=>{
+									if(err)  res.status(500).json(`Error al realizar la peticion: ${err}` )
+									res.status(200).json('USUARIO AGREGADO EXITOSO.')
+								})
 
+					})
 			})
 	})
 }

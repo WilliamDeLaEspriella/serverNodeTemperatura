@@ -1,10 +1,11 @@
 'use strict'
-const monggose=require('mongoose')
+
+const mongoose=require('mongoose')
 const Schema=mongoose.Schema
 
 
 const  HistorialSchema= new Schema({
-	dato: [type: Schema.ObjectId, ref: "Dato"] 
+	dato: [{type: Schema.ObjectId, ref: "Dato"}] 
 })
 
-module.exports=mongoose.model('Historial',DatoSchema)
+module.exports=mongoose.model('Historial',HistorialSchema)

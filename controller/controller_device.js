@@ -6,6 +6,7 @@ const User=require('../schemas/user')
 const service = require('../services')
 const UserDevice=require('../schemas/user_device')
 const fcm = require('../services/fcmTopic')
+const Historial=require('../schemas/Historial')
 
 function getDevice(req,res){
 
@@ -119,10 +120,24 @@ function putDevice(req,res){
 												if(err) res.status(500).json(`error al actualizar el device: ${err}`)
 												UserDevice.findByIdAndUpdate(devices[0]._id,{$set:{dato:req.body.temperatura}},(err,update)=>{
 													if(err) res.status(500).json(`error al actualizar el device: ${err}`)
-														console.log(update)	
-														notificacion(user[0].token,req.body.temperatura,devices[0].name)
-														res.status(200).json("actualizado")
-												})
+														
+														let dato=new Dato()
+														dato.temperatura= req.body.temperatura
+														dato.save((err,ds)=>{
+															if(err) res.status(500).json(`error al actualizar el device: ${err}`)
+														
+															Historial.findById(update.historial,(err,Historials)=>{
+															if(err) res.status(500).json(`error al actualizar el device: ${err}`)
+															Historials.dato.push(dato)
+															Historials.save((err,histo)=>{
+															
+																notificacion(user[0].token,req.body.temperatura,devices[0].name)
+																res.status(200).json("actualizado")	
+															})
+														})
+														})
+														
+													})
 
 												//console.log(deviceUpdate)	
 												//console.log(userDevice)	
@@ -144,6 +159,7 @@ function putDevice(req,res){
 	
    
 }
+
 function removeDevice(res ,req){
 	let id=req.body.id
 	Device.find({name:id},(err,devices)=>{
@@ -179,9 +195,21 @@ function removeDevice(res ,req){
 												if(err) res.status(500).json(`error al actualizar el device: ${err}`)
 												UserDevice.findByIdAndUpdate(devices[0]._id,{$set:{dato:req.params.temperatura}},(err,update)=>{
 													if(err) res.status(500).json(`error al actualizar el device: ${err}`)
-														console.log(update)	
-														notificacion(user[0].token,req.params.temperatura,devices[0]._id)
-														res.status(200).json("actualizado")
+														let dato=new Dato()
+														dato.temperatura= req.params.temperatura
+														dato.save((err,ds)=>{
+															Historial.findById(update.historial,(err,Historials)=>{
+															Historials.dato.push(dato)
+															Historials.save((err,histo)=>{
+
+																notificacion(user[0].token,req.params.temperatura,devices[0]._id)
+																res.status(200).json("actualizado")
+
+															})
+														})
+														})
+														
+
 												})
 
 												//console.log(deviceUpdate)	
