@@ -131,7 +131,7 @@ function putDevice(req,res){
 															Historials.dato.push(dato)
 															Historials.save((err,histo)=>{
 															
-																notificacion(user[0].token,req.body.temperatura,devices[0].name)
+																notificacion(user[0].token,req.body.temperatura,devices[0]._id)
 																res.status(200).json("actualizado")	
 															})
 														})

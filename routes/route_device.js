@@ -1,4 +1,4 @@
-'use strict'
+ 'use strict'
 const express=require('express')
 const DeviceCtrl =require('../controller/controller_device')
 const auth = require('../middlewares/auth')
