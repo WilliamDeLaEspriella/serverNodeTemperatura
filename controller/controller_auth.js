@@ -48,7 +48,7 @@ bcrypt.compare(req.body.password, user[0].password, function(err, res) {
            user[0].token.push(req.body.token)
           user[0].save((err,userx)=>{
               console.log(userx)
-           fcm.enviarNotificaion(req.body.token,"inicio seccion")
+          
            rest.status(200).json(service.createTokenUser(user[0]))
           
         })
