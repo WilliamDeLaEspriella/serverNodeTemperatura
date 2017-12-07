@@ -90,7 +90,7 @@ function cerrarSesion(req,res) {
      user.token.splice(index, 1);
        user.save((err,user)=>{
         if (err) return res.status(500).send({ message: err })
-        rest.status(200).json('Gracias por Usar nuestra App')
+        res.status(200).json('Gracias por Usar nuestra App')
        })
      })   
 }
