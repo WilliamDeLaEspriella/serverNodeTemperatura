@@ -131,7 +131,7 @@ function putDevice(req,res){
 															Historials.dato.push(dato)
 															Historials.save((err,histo)=>{
 															
-																notificacion(user[0].token,req.body.temperatura,devices[0]._id)
+																notificacion(user[0].token,req.body.temperatura,nameDevice)
 																res.status(200).json("actualizado")	
 															})
 														})
@@ -202,7 +202,7 @@ function removeDevice(res ,req){
 															Historials.dato.push(dato)
 															Historials.save((err,histo)=>{
 
-																notificacion(user[0].token,req.params.temperatura,devices[0]._id)
+																notificacion(user[0].token,req.params.temperatura,nameDevice)
 																res.status(200).json("actualizado")
 
 															})
@@ -230,9 +230,16 @@ function removeDevice(res ,req){
 	})
 	
 }
+function editUserDevice(req,res) {
+	UserDevice.findByIdAndUpdate(req.body.id,req.body,(err,update)=>{
+		if(err) res.status(500).json(`error al actualizar el device: ${err}`)
+			res.status(200).json("actualizado")
+	})
+}
 module.exports={
 	getDevice,
 	postDevice,
+	editUserDevice,
 	putDevice,
 	putDevice2,
 	removeDevice,

@@ -14,13 +14,13 @@ function getHistorialFil(req,res) {
 	Historial.findById(req.body.id,(err,historial)=>{
 		
 		Dato.find({_id:{$in:historial.dato}},(err,datos)=>{
-			console.log(datos)
 				var filtro=[]
 				for (var i = datos.length - 1; i >= 0; i--) {
-					if(datos[i].date.getMonth()==req.body.mes && datos[i].date.getFullYear()==req.body.year){
+					if(datos[i].date.getMonth()==req.body.mes && datos[i].date.getFullYear()==req.body.year && datos[i].date.getDate()==req.body.dia){
 						filtro.push(datos[i])
 					}
 				}
+				console.log(filtro)
 			res.status(200).send(filtro)
 		})
 

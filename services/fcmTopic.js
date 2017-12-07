@@ -40,20 +40,14 @@ function enviarData(tokenDestinatario, date,user) {
 	    	data:date,
 	    	usuario:user
 	    },
-	    notification: {
-	        title: 'Alerta',
-	        body: date+" "+user,
-	        //icon: "notificacion",
-	        sound: "default",
-	        color: "#00BCD4"
-	    }
+	    notification: {}
 	};
 
 	fcm.send(message, function(err, response){
 	    if (err) {
 	        console.log("Something has gone wrong!");
 	    } else {
-	        console.log("Successfully sent with response: ", response);
+	         console.log(message.data);
 	    }
 	});
 }

@@ -63,6 +63,37 @@ bcrypt.compare(req.body.password, user[0].password, function(err, res) {
     
   })
 }
+function cambiarContraseña (req, rest) {
+  bcrypt.genSalt(10,(err,salt)=>{
+    if(err) res.status(503).send({message:err})
+     bcrypt.hash(req.body.password,salt,null,(err,hash)=>{
+      if (err) res.status(503).send({message:err})
+      User.findByIdAndUpdate(req.user,{password:hash}, (err, user) => {
+        if (err) return rest.status(500).send({ message: err })
+        if (user == null) return rest.status(203).json('Email no encontrado.' )
+
+          rest.status(200).json('Contraseña Cambiada')
+
+             
+      })
+
+  })   
+ })
+
+
+}
+function cerrarSesion(req,res) {
+ User.findById(req.user,(err,user)=>{
+    if (err) res.status(503).send({message:err})
+     
+    var index = user.token.indexOf(req.body.token);
+     array.splice(index, 1);
+       user.save((err,user)=>{
+        if (err) return res.status(500).send({ message: err })
+        rest.status(200).json('Gracias por Usar nuestra App')
+       })
+     })   
+}
 
  function function_name(array,name) {
   for (var i = array.length - 1; i >= 0; i--) {
@@ -74,5 +105,7 @@ bcrypt.compare(req.body.password, user[0].password, function(err, res) {
 }
 module.exports = {
   signUp,
-  signIn
+  signIn,
+  cambiarContraseña,
+cerrarSesion
 }
