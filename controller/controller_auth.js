@@ -87,7 +87,7 @@ function cerrarSesion(req,res) {
     if (err) res.status(503).send({message:err})
      
     var index = user.token.indexOf(req.body.token);
-     array.splice(index, 1);
+     user.token.splice(index, 1);
        user.save((err,user)=>{
         if (err) return res.status(500).send({ message: err })
         rest.status(200).json('Gracias por Usar nuestra App')
