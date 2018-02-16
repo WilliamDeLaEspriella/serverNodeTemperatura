@@ -45,6 +45,7 @@ function enviarData(tokenDestinatario, date,user) {
 
 	fcm.send(message, function(err, response){
 	    if (err) {
+	    	console.log(err)
 	        console.log("Something has gone wrong!");
 	    } else {
 	         console.log(message.data);
